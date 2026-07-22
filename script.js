@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function setLang(lang) {
     body.setAttribute('data-lang', lang);
+    document.documentElement.setAttribute('lang', lang);
+    var t = body.getAttribute('data-title-' + lang);
+    if (t) { document.title = t; }
     if (langBtn) {
       langBtn.textContent = lang === 'es' ? 'EN' : 'ES';
       langBtn.setAttribute('aria-label', lang === 'es' ? 'Switch to English' : 'Cambiar a español');
