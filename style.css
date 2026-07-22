@@ -356,6 +356,7 @@ main { padding-bottom: 40px; }
 }
 
 [data-lang] { display: none; }
+body[data-lang] { display: block; }
 body[data-lang="es"] [data-lang="es"] { display: revert; }
 body[data-lang="en"] [data-lang="en"] { display: revert; }
 span[data-lang] { display: none; }
