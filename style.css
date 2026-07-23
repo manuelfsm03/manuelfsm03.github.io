@@ -502,6 +502,109 @@ table.info td { padding: 10px 0; vertical-align: top; }
   max-width: 24ch;
 }
 
+/* ---------- Category system (CV entries): second color separates ideas ---------- */
+.cat-tag {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .64rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: 2px 8px;
+  border-radius: 3px;
+  vertical-align: 2px;
+  margin-left: 8px;
+}
+.cat-work { color: var(--link); background: rgba(169, 131, 43, .12); }
+.cat-research { color: var(--accent2); background: rgba(46, 90, 110, .1); }
+.cat-teach { color: var(--up); background: rgba(47, 107, 82, .1); }
+
+.entry { border-left: 3px solid var(--rule); padding-left: 16px; }
+.entry.cat-b-work { border-left-color: var(--accent); }
+.entry.cat-b-research { border-left-color: var(--accent2); }
+.entry.cat-b-teach { border-left-color: var(--up); }
+
+/* ---------- Stat band (CV): quick numbers, à la landing ---------- */
+.stat-band {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin: 1.8em 0 .4em;
+}
+@media (max-width: 640px) { .stat-band { grid-template-columns: repeat(2, 1fr); } }
+.stat {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 14px 16px;
+}
+.stat-num {
+  font-family: 'Source Serif 4', serif;
+  font-weight: 600;
+  font-size: 1.9rem;
+  line-height: 1;
+  color: var(--accent);
+}
+.stat-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .7rem;
+  color: var(--muted);
+  margin-top: 6px;
+  line-height: 1.35;
+}
+
+/* ---------- Card visual band (publications) ---------- */
+.card-visual {
+  margin: -22px -24px 16px;
+  background: var(--paper2);
+  border-bottom: 1px solid var(--rule);
+}
+.card-visual svg { display: block; width: 100%; height: 92px; }
+
+/* ---------- Contact cards ---------- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 1.6em 0;
+}
+@media (max-width: 720px) { .contact-grid { grid-template-columns: 1fr; } }
+a.contact-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 18px;
+  color: var(--ink);
+  border-bottom: 1px solid var(--rule);
+  transition: border-color .18s ease;
+}
+a.contact-card:hover { border-color: var(--accent); }
+.contact-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--accent2);
+}
+.contact-value { font-size: .95rem; font-weight: 500; word-break: break-word; }
+.contact-arrow { font-family: 'IBM Plex Mono', monospace; font-size: .78rem; color: var(--link); margin-top: auto; }
+
+.loc-line {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .8rem;
+  color: var(--muted);
+}
+
+/* ---------- 404 flourish ---------- */
+.err-tick {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .85rem;
+  color: var(--down);
+  margin: -0.4em 0 1.4em;
+}
+
 /* ---------- Footer ---------- */
 footer {
   margin-top: 4em;
