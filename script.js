@@ -67,4 +67,27 @@ document.addEventListener('DOMContentLoaded', function () {
     // Duplicated once for a seamless marquee loop
     tickerTrack.innerHTML = markets.map(tickHTML).join('') + markets.map(tickHTML).join('');
   }
+
+  // ---- CV side index: highlight the section in view ----
+  var toc = document.querySelector('.cv-toc');
+  if (toc) {
+    var tocLinks = toc.querySelectorAll('a');
+    var anchors = [];
+    tocLinks.forEach(function (a) {
+      var el = document.getElementById(a.getAttribute('href').slice(1));
+      if (el) { anchors.push({ el: el, link: a }); }
+    });
+    function updateToc() {
+      var y = window.scrollY + 110;
+      var current = null;
+      anchors.forEach(function (s) {
+        var top = s.el.getBoundingClientRect().top + window.scrollY;
+        if (top <= y) { current = s.link; }
+      });
+      tocLinks.forEach(function (a) { a.classList.remove('toc-active'); });
+      (current || (anchors[0] && anchors[0].link)).classList.add('toc-active');
+    }
+    window.addEventListener('scroll', updateToc, { passive: true });
+    updateToc();
+  }
 });

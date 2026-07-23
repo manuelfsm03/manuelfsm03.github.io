@@ -115,16 +115,37 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 @keyframes ticker-tape { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } }
 
-.ticker-note {
-  margin: 0;
-  padding: 5px 0;
-  text-align: center;
+
+/* ---------- CV side index (à la manzisebastian.github.io/cv) ---------- */
+.anchor { display: block; position: relative; top: -70px; visibility: hidden; }
+
+.cv-toc {
+  display: none;
+  position: fixed;
+  top: 130px;
+  left: calc(50% - (var(--max-w) / 2) - 200px);
+  width: 168px;
   font-family: 'IBM Plex Mono', monospace;
-  font-size: .68rem;
-  letter-spacing: .04em;
+  font-size: .74rem;
+  line-height: 1.4;
+}
+.cv-toc a {
+  display: block;
   color: var(--muted);
-  background: var(--paper2);
-  border-bottom: 1px solid var(--rule);
+  padding: 5px 0 5px 12px;
+  border-left: 2px solid var(--rule);
+  border-bottom: none;
+}
+.cv-toc a:hover { color: var(--ink); border-left-color: var(--accent); }
+.cv-toc a.toc-active {
+  color: var(--accent2);
+  border-left-color: var(--accent2);
+  font-weight: 500;
+}
+
+/* Only show when there's real room beside the 780px column */
+@media (min-width: 1180px) {
+  .cv-toc { display: block; }
 }
 
 /* ---------- Layout ---------- */
