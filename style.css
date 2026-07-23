@@ -22,6 +22,8 @@
   --accent: #A9832B;
   --link: #8A671D;
   --accent2: #2E5A6E;
+  --green: #2F6B52;
+  --green-deep: #24523F;
   --rule: #DAD5C7;
   --card: #FFFFFF;
   --up: #2F6B52;
@@ -66,7 +68,7 @@ h2::before {
   top: .42em;
   width: 10px;
   height: 10px;
-  background: var(--accent);
+  background: var(--green);
 }
 h3 { font-size: 1.05rem; margin-bottom: .15em; }
 h3.subhead { margin-top: 1.8em; }
@@ -80,6 +82,19 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .muted { color: var(--muted); }
 
 /* ---------- Ledger rule: signature divider (subtle tick marks, like a spreadsheet gridline) ---------- */
+.ledger { position: relative; }
+.ledger::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -1px;
+  width: 66px;
+  height: 3px;
+  background: linear-gradient(to right,
+    var(--green) 0 22px, transparent 22px 24px,
+    var(--accent2) 24px 44px, transparent 44px 46px,
+    var(--accent) 46px 66px);
+}
 .ledger {
   height: 6px;
   margin: 2.2em 0;
@@ -143,8 +158,8 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 }
 .cv-toc a:hover { color: var(--ink); border-left-color: var(--accent); }
 .cv-toc a.toc-active {
-  color: var(--accent2);
-  border-left-color: var(--accent2);
+  color: var(--green);
+  border-left-color: var(--green);
   font-weight: 500;
 }
 
@@ -284,7 +299,7 @@ nav.nav-links a.active {
   font-size: .72rem;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--accent2);
+  color: var(--green);
   margin-bottom: 16px;
 }
 
@@ -302,7 +317,7 @@ nav.nav-links a.active {
   object-fit: cover;
   border: 1px solid var(--rule);
   flex-shrink: 0;
-  box-shadow: 8px 8px 0 rgba(46, 90, 110, .16);
+  box-shadow: 8px 8px 0 rgba(47, 107, 82, .18);
 }
 .role-line {
   font-family: 'IBM Plex Mono', monospace;
@@ -367,32 +382,7 @@ table.info td { padding: 10px 0; vertical-align: top; }
 .entry-desc ul { margin: .5em 0 0; padding-left: 1.2em; }
 .entry-desc li { margin-bottom: .3em; }
 
-/* ---------- Skills grid ---------- */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 22px;
-  margin: 1em 0 2em;
-}
-.skill-group h3 {
-  font-family: 'IBM Plex Mono', monospace;
-  text-transform: uppercase;
-  font-size: .74rem;
-  letter-spacing: .06em;
-  color: var(--muted);
-  font-weight: 500;
-  margin-bottom: .6em;
-}
-.skill-group ul { list-style: none; margin: 0; padding: 0; }
-.skill-group li {
-  display: flex;
-  justify-content: space-between;
-  padding: 5px 0;
-  border-bottom: 1px dotted var(--rule);
-  font-size: .92rem;
-}
-.skill-group li span.level { color: var(--accent2); font-size: .82rem; font-family: 'IBM Plex Mono', monospace; }
-
+.skill-group li span
 /* ---------- Publication / project cards ---------- */
 .card {
   background: var(--card);
@@ -420,8 +410,8 @@ table.info td { padding: 10px 0; vertical-align: top; }
   border-radius: 3px;
   white-space: nowrap;
 }
-.status-tag.published { color: var(--accent2); background: rgba(59,93,82,.09); }
-.status-tag.progress { color: var(--accent); background: rgba(169,131,43,.1); }
+.status-tag.published { color: #F7F6F2; background: var(--green); }
+.status-tag.progress { color: #1B222A; background: var(--accent); }
 .card-meta { font-size: .86rem; color: var(--muted); margin: .3em 0 .8em; }
 .card-body { font-size: .95rem; }
 
@@ -523,34 +513,6 @@ table.info td { padding: 10px 0; vertical-align: top; }
 .entry.cat-b-research { border-left-color: var(--accent2); }
 .entry.cat-b-teach { border-left-color: var(--up); }
 
-/* ---------- Stat band (CV): quick numbers, à la landing ---------- */
-.stat-band {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  margin: 1.8em 0 .4em;
-}
-@media (max-width: 640px) { .stat-band { grid-template-columns: repeat(2, 1fr); } }
-.stat {
-  background: var(--card);
-  border: 1px solid var(--rule);
-  border-radius: 4px;
-  padding: 14px 16px;
-}
-.stat-num {
-  font-family: 'Source Serif 4', serif;
-  font-weight: 600;
-  font-size: 1.9rem;
-  line-height: 1;
-  color: var(--accent);
-}
-.stat-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: .7rem;
-  color: var(--muted);
-  margin-top: 6px;
-  line-height: 1.35;
-}
 
 /* ---------- Card visual band (publications) ---------- */
 .card-visual {
@@ -586,7 +548,7 @@ a.contact-card:hover { border-color: var(--accent); }
   font-size: .68rem;
   text-transform: uppercase;
   letter-spacing: .1em;
-  color: var(--accent2);
+  color: var(--green);
 }
 .contact-value { font-size: .95rem; font-weight: 500; word-break: break-word; }
 .contact-arrow { font-family: 'IBM Plex Mono', monospace; font-size: .78rem; color: var(--link); margin-top: auto; }
@@ -595,6 +557,42 @@ a.contact-card:hover { border-color: var(--accent); }
   font-family: 'IBM Plex Mono', monospace;
   font-size: .8rem;
   color: var(--muted);
+}
+
+/* ---------- Skill pills ---------- */
+.pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin: .6em 0 1.2em; }
+.pill {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: .88rem;
+  font-weight: 500;
+}
+.pill-level {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .66rem;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.lv-adv, .lv-nat { color: var(--green); }
+.lv-mid { color: var(--accent2); }
+.pill:hover { border-color: var(--green); }
+
+/* ---------- Nav contact CTA ---------- */
+nav.nav-links a.nav-cta {
+  border: 1px solid var(--green);
+  color: var(--green);
+  border-radius: 3px;
+  padding: 5px 12px;
+}
+nav.nav-links a.nav-cta:hover, nav.nav-links a.nav-cta.active {
+  background: var(--green);
+  color: var(--bg);
+  border-bottom-color: var(--green);
 }
 
 /* ---------- 404 flourish ---------- */
@@ -629,7 +627,7 @@ main { padding-bottom: 40px; }
   font-size: .72rem;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--accent2);
+  color: var(--green);
   margin: 44px 0 0;
 }
 .page-kicker + .page-title-row { padding-top: 10px; }
