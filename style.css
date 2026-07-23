@@ -518,9 +518,41 @@ table.info td { padding: 10px 0; vertical-align: top; }
 
 /* ---------- Card visual band (publications) ---------- */
 .card-visual {
+  position: relative;
   background: var(--paper2);
   border-bottom: 1px solid var(--rule);
 }
+.visual-caption {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .64rem;
+  letter-spacing: .03em;
+  color: var(--muted);
+}
+.visual-caption .swatch {
+  display: inline-block;
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+  vertical-align: 2px;
+  margin: 0 4px 0 8px;
+}
+.sw-gold { background: var(--accent); }
+.sw-blue { background: var(--accent2); }
+.sw-green { background: var(--green); }
+.visual-labels span {
+  position: absolute;
+  bottom: 5px;
+  transform: translateX(-50%);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .64rem;
+  color: var(--muted);
+}
+.visual-labels span:nth-child(1) { left: 25.9%; }
+.visual-labels span:nth-child(2) { left: 50%; }
+.visual-labels span:nth-child(3) { left: 74.1%; }
 .card-visual svg { display: block; width: 100%; height: 92px; }
 
 /* ---------- Contact cards ---------- */
