@@ -1,7 +1,19 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // ---- Language toggle (session-only, no storage; defaults to Spanish) ----
+  // ---- Language toggle (persists across pages via ?lang=en in URLs; no storage; defaults to Spanish) ----
   var body = document.body;
   var langBtn = document.querySelector('.lang-toggle');
+
+  // Rewrite internal .html links so the chosen language follows the visitor
+  function syncLinks(lang) {
+    document.querySelectorAll('a[href]').forEach(function (a) {
+      var href = a.getAttribute('href') || '';
+      if (!/^\/?[A-Za-z0-9._-]+\.html([?#].*)?$/.test(href)) { return; }
+      var hashIdx = href.indexOf('#');
+      var hash = hashIdx > -1 ? href.slice(hashIdx) : '';
+      var base = (hashIdx > -1 ? href.slice(0, hashIdx) : href).split('?')[0];
+      a.setAttribute('href', lang === 'en' ? base + '?lang=en' + hash : base + hash);
+    });
+  }
 
   function setLang(lang) {
     body.setAttribute('data-lang', lang);
@@ -12,8 +24,16 @@ document.addEventListener('DOMContentLoaded', function () {
       langBtn.textContent = lang === 'es' ? 'EN' : 'ES';
       langBtn.setAttribute('aria-label', lang === 'es' ? 'Switch to English' : 'Cambiar a español');
     }
+    syncLinks(lang);
+    if (window.history && history.replaceState) {
+      history.replaceState(null, '', location.pathname + (lang === 'en' ? '?lang=en' : '') + location.hash);
+    }
   }
-  setLang('es');
+  var initialLang = 'es';
+  try {
+    if (new URLSearchParams(location.search).get('lang') === 'en') { initialLang = 'en'; }
+  } catch (e) { /* URLSearchParams no disponible: queda español */ }
+  setLang(initialLang);
 
   if (langBtn) {
     langBtn.addEventListener('click', function () {
@@ -36,10 +56,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ---- Active nav link based on current page ----
+  // ---- Active nav link based on current page (ignoring ?lang=en and hashes) ----
   var here = location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('nav.nav-links a').forEach(function (a) {
-    var href = a.getAttribute('href');
+    var href = (a.getAttribute('href') || '').split('?')[0].split('#')[0].split('/').pop();
     if (href === here || (here === '' && href === 'index.html')) {
       a.classList.add('active');
     }
