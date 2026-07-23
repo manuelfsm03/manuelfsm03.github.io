@@ -544,11 +544,12 @@ table.info td { padding: 10px 0; vertical-align: top; }
 .sw-green { background: var(--green); }
 .visual-labels span {
   position: absolute;
-  bottom: 5px;
+  bottom: 24%;
   transform: translateX(-50%);
   font-family: 'IBM Plex Mono', monospace;
-  font-size: .64rem;
-  color: var(--muted);
+  font-size: .62rem;
+  letter-spacing: .08em;
+  color: #F7F6F2;
 }
 .visual-labels span:nth-child(1) { left: 25.9%; }
 .visual-labels span:nth-child(2) { left: 50%; }
