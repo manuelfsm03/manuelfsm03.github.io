@@ -68,8 +68,8 @@ document.addEventListener('DOMContentLoaded', function () {
     tickerTrack.innerHTML = markets.map(tickHTML).join('') + markets.map(tickHTML).join('');
   }
 
-  // ---- CV side index: highlight the section in view ----
-  var toc = document.querySelector('.cv-toc');
+  // ---- Side index: highlight the section in view ----
+  var toc = document.querySelector('.side-toc');
   if (toc) {
     var tocLinks = toc.querySelectorAll('a');
     var anchors = [];

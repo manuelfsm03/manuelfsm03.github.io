@@ -136,10 +136,10 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 }
 
 
-/* ---------- CV side index (à la manzisebastian.github.io/cv) ---------- */
+/* ---------- Side index (all content pages) ---------- */
 .anchor { display: block; position: relative; top: -70px; visibility: hidden; }
 
-.cv-toc {
+.side-toc {
   display: none;
   position: fixed;
   top: 130px;
@@ -149,15 +149,15 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   font-size: .74rem;
   line-height: 1.4;
 }
-.cv-toc a {
+.side-toc a {
   display: block;
   color: var(--muted);
   padding: 5px 0 5px 12px;
   border-left: 2px solid var(--rule);
   border-bottom: none;
 }
-.cv-toc a:hover { color: var(--ink); border-left-color: var(--accent); }
-.cv-toc a.toc-active {
+.side-toc a:hover { color: var(--ink); border-left-color: var(--accent); }
+.side-toc a.toc-active {
   color: var(--green);
   border-left-color: var(--green);
   font-weight: 500;
@@ -165,7 +165,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* Only show when there's real room beside the 780px column */
 @media (min-width: 1180px) {
-  .cv-toc { display: block; }
+  .side-toc { display: block; }
 }
 
 /* ---------- Layout ---------- */
