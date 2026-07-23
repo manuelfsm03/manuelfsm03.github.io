@@ -649,5 +649,12 @@ body[data-lang="en"] [data-lang="en"] { display: revert; }
 span[data-lang] { display: none; }
 body[data-lang="es"] span[data-lang="es"] { display: inline; }
 body[data-lang="en"] span[data-lang="en"] { display: inline; }
+
+/* Elementos con padding/fondo: inline los solapa (el padding vertical de un inline
+   pinta sobre las líneas vecinas sin empujarlas) — forzar inline-block al mostrarse */
+body[data-lang="es"] .status-tag[data-lang="es"],
+body[data-lang="en"] .status-tag[data-lang="en"],
+body[data-lang="es"] .pill-level [data-lang="es"],
+body[data-lang="en"] .pill-level [data-lang="en"] { display: inline-block; }
 body[data-lang="es"] .btn[data-lang="es"],
 body[data-lang="en"] .btn[data-lang="en"] { display: inline-block; }
