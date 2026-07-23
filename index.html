@@ -42,7 +42,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body data-lang="es" data-title-es="Manuel Fernández San Martín" data-title-en="Manuel Fernández San Martín">
@@ -61,10 +61,25 @@
   </div>
 </header>
 
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track" id="tickerTrack"></div>
+</div>
+<p class="ticker-note" data-lang="es">cotizaciones ilustrativas — no en vivo</p>
+<p class="ticker-note" data-lang="en">illustrative quotes — not live</p>
+
 <main class="wrap">
 
   <section class="hero">
+    <div class="hero-curve" aria-hidden="true">
+      <svg viewBox="0 0 780 260" preserveAspectRatio="none">
+        <path d="M0 210 C80 198 140 178 220 184 C300 190 360 148 440 154 C520 160 580 112 660 104 L780 96" fill="none" stroke="#2E5A6E" stroke-opacity=".28" stroke-width="2"/>
+        <path d="M0 170 C90 182 160 204 240 196 C320 188 380 226 460 214 C540 202 600 172 680 166 L780 162" fill="none" stroke="#A9832B" stroke-opacity=".3" stroke-width="2"/>
+        <path d="M0 236 C100 230 180 240 260 232 C360 222 420 244 520 238 C600 232 660 218 780 212" fill="none" stroke="#4a7a6a" stroke-opacity=".16" stroke-width="2"/>
+      </svg>
+    </div>
     <div class="hero-text">
+      <div class="kicker" data-lang="es">Economista — investigación cuantitativa en mercados y macro</div>
+      <div class="kicker" data-lang="en">Economist — quantitative research in markets &amp; macro</div>
       <h1>Manuel Fernández San Martín</h1>
       <p class="role-line">Ssr. Economic Research Analyst · Bunge&nbsp;&nbsp;—&nbsp;&nbsp;Research Fellow · IIEP (UBA–CONICET)</p>
 
