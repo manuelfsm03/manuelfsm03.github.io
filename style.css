@@ -80,6 +80,8 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
 
 .muted { color: var(--muted); }
+.muted strong { color: var(--ink); font-weight: 600; }
+.muted em { font-style: italic; }
 
 /* ---------- Ledger rule: signature divider (subtle tick marks, like a spreadsheet gridline) ---------- */
 .ledger { position: relative; }
