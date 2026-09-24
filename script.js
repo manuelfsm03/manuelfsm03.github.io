@@ -42,72 +42,57 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ---- Mobile nav toggle ----
-  var navToggle = document.querySelector('.nav-toggle-btn');
-  var navLinks = document.querySelector('nav.nav-links');
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', function () {
-      navLinks.classList.toggle('open');
-      var expanded = navLinks.classList.contains('open');
-      navToggle.setAttribute('aria-expanded', expanded);
-    });
-    navLinks.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () { navLinks.classList.remove('open'); });
-    });
-  }
-
   // ---- Active nav link based on current page (ignoring ?lang=en and hashes) ----
   var here = location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('nav.nav-links a').forEach(function (a) {
+  document.querySelectorAll('.rh-links a').forEach(function (a) {
     var href = (a.getAttribute('href') || '').split('?')[0].split('#')[0].split('/').pop();
-    if (href === here || (here === '' && href === 'index.html')) {
-      a.classList.add('active');
-    }
+    if (href === here) { a.classList.add('active'); }
   });
 
-  // ---- Ticker (home only): illustrative figures, explicitly labeled as not live ----
-  var tickerTrack = document.getElementById('tickerTrack');
-  if (tickerTrack) {
-    var markets = [
-      { sym: 'MERVAL',  name: 'BA',    price: '2.145.300', chg: '1.2%',   up: true },
-      { sym: 'S&P 500', name: 'US',    price: '6.310',     chg: '0.4%',   up: true },
-      { sym: 'USD/ARS', name: 'MEP',   price: '1.480',     chg: '0.3%',   up: false },
-      { sym: 'SOJA',    name: 'CBOT',  price: '412.50',    chg: '0.8%',   up: true },
-      { sym: 'MAÍZ',    name: 'CBOT',  price: '178.25',    chg: '0.2%',   up: false },
-      { sym: 'TRIGO',   name: 'CBOT',  price: '221.75',    chg: '1.5%',   up: true },
-      { sym: 'UST 10Y', name: 'yield', price: '4.12%',     chg: '5 bps',  up: false },
-      { sym: 'XAU',     name: 'oro',   price: '3.180',     chg: '0.6%',   up: true }
-    ];
-    function tickHTML(m) {
-      var arrow = m.up
-        ? '<span class="up">▲' + m.chg + '</span>'
-        : '<span class="down">▼' + m.chg + '</span>';
-      return '<span class="tick"><b>' + m.sym + '</b><span class="tname">' + m.name + '</span><span>' + m.price + '</span>' + arrow + '</span>';
-    }
-    // Duplicated once for a seamless marquee loop
-    tickerTrack.innerHTML = markets.map(tickHTML).join('') + markets.map(tickHTML).join('');
+  // ---- "Esta versión: <mes> <año>" from the deploy date (GitHub Pages sends Last-Modified).
+  // Without that header the browser reports "now", so anything under a minute old keeps the static text.
+  var lm = new Date(document.lastModified);
+  if (!isNaN(lm.getTime()) && Date.now() - lm.getTime() > 60000) {
+    var months = {
+      es: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+      en: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    };
+    var y = lm.getFullYear(), m = lm.getMonth();
+    document.querySelectorAll('time.js-version').forEach(function (el) {
+      var holder = el.closest('[data-lang]');
+      var lang = holder ? holder.getAttribute('data-lang') : 'es';
+      el.textContent = lang === 'en' ? months.en[m] + ' ' + y : months.es[m] + ' de ' + y;
+      el.setAttribute('datetime', y + '-' + (m < 9 ? '0' : '') + (m + 1));
+    });
   }
 
-  // ---- Side index: highlight the section in view ----
-  var toc = document.querySelector('.side-toc');
-  if (toc) {
-    var tocLinks = toc.querySelectorAll('a');
-    var anchors = [];
-    tocLinks.forEach(function (a) {
-      var el = document.getElementById(a.getAttribute('href').slice(1));
-      if (el) { anchors.push({ el: el, link: a }); }
-    });
-    function updateToc() {
-      var y = window.scrollY + 110;
-      var current = null;
-      anchors.forEach(function (s) {
-        var top = s.el.getBoundingClientRect().top + window.scrollY;
-        if (top <= y) { current = s.link; }
-      });
-      tocLinks.forEach(function (a) { a.classList.remove('toc-active'); });
-      (current || (anchors[0] && anchors[0].link)).classList.add('toc-active');
+  // ---- Figura 1: move "today" and the ongoing bars to the actual date ----
+  // Positions are months since January 2022; the static HTML is correct as of September 2026.
+  var tl = document.querySelector('.tl');
+  if (tl) {
+    var BASE = 2022;
+    var now = new Date();
+    var t = (now.getFullYear() - BASE) * 12 + now.getMonth() + (now.getDate() - 1) / 31;
+    var span = parseFloat(tl.style.getPropertyValue('--span')) || 72;
+    var needed = (now.getFullYear() - BASE + 1) * 12;
+    if (needed > span) {
+      span = needed;
+      tl.style.setProperty('--span', span);
+      var years = tl.querySelector('.tl-years');
+      if (years) {
+        var html = '';
+        for (var yr = BASE; yr < BASE + span / 12; yr++) {
+          html += '<span style="--y:' + (yr - BASE) * 12 + '">' + yr + '</span>';
+        }
+        years.innerHTML = html;
+      }
+      document.querySelectorAll('.js-tl-end').forEach(function (el) { el.textContent = BASE + span / 12 - 1; });
     }
-    window.addEventListener('scroll', updateToc, { passive: true });
-    updateToc();
+    tl.querySelectorAll('.tl-bar.ongoing').forEach(function (bar) {
+      var s = parseFloat(bar.style.getPropertyValue('--s')) || 0;
+      bar.style.setProperty('--e', Math.max(t, s + 0.5).toFixed(2));
+    });
+    var today = tl.querySelector('.tl-today');
+    if (today) { today.style.setProperty('--t', t.toFixed(2)); }
   }
 });
