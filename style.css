@@ -573,8 +573,9 @@ body[data-lang="en"] .jel::after { content: attr(data-en); }
 .panel.term { background: var(--term); }
 .panel .tag { position: absolute; top: 10px; left: 12px; font: 700 .9rem var(--sans); color: var(--muted); }
 .panel.term .tag { color: #8A8A8A; }
-.tilemap { height: 168px; width: auto; max-width: 100%; overflow: visible; }
-.tilemap text { font-family: var(--sans); font-size: 11px; font-weight: 500; fill: var(--ink); }
+.tilemap { height: 172px; width: auto; max-width: 100%; overflow: visible; }
+.tilemap text { font-family: var(--sans); font-size: 18px; font-weight: 500; fill: var(--ink); }
+.tilemap line { stroke: var(--ink); stroke-width: 1.2; }
 .big-n { font-family: var(--serif); font-weight: 760; font-size: 3.2rem; line-height: .9; color: var(--blue); }
 .big-n small { display: block; margin-top: 6px; font: 500 .9rem/1.25 var(--sans); color: var(--muted); max-width: 9rem; }
 .sub-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 6px; }

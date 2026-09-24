@@ -71,28 +71,102 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // ---- Tile maps of Argentina's 24 jurisdictions ([name, column, row]) ----
-  var TILES = [
-    ['Jujuy', 1, 0], ['Salta', 2, 0], ['Formosa', 3, 0], ['Misiones', 4, 0],
-    ['Catamarca', 0, 1], ['Tucumán', 1, 1], ['Santiago del Estero', 2, 1], ['Chaco', 3, 1], ['Corrientes', 4, 1],
-    ['San Juan', 0, 2], ['La Rioja', 1, 2], ['Córdoba', 2, 2], ['Santa Fe', 3, 2], ['Entre Ríos', 4, 2],
-    ['Mendoza', 0, 3], ['San Luis', 1, 3], ['La Pampa', 2, 3], ['Buenos Aires', 3, 3], ['CABA', 4, 3],
-    ['Neuquén', 1, 4], ['Río Negro', 2, 4], ['Chubut', 2, 5], ['Santa Cruz', 2, 6], ['Tierra del Fuego', 3, 7]
-  ];
+  // ---- Tile maps of Argentina: one small square per ~90 km cell, coloured by province ----
+  // Grid rasterised from INDEC/IGN department boundaries (github.com/mgaitan/departamentos_argentina),
+  // latitude-corrected; CABA is smaller than a cell and gets the cell its centre falls in.
+  var AR = {
+    cols: 24,
+    rows: [
+      "...........QQ",
+      "........JJQQQI",
+      "........JJQQQI",
+      ".......QJJJQQIII",
+      "......QQQQQQQDDII",
+      "......CCQQQQDDDDIII",
+      "......CCQQQVVVDDIII...N",
+      "......CCCXXVVVDDDD....N",
+      "......CCCXVVVVDDDDF..NN",
+      ".....LCCCCVVVVUUUFFFF",
+      ".....LLLLCVVVVUUUFFFF",
+      "....RRLLLCVVVVUUUFFF",
+      "....RRRLLLGGGVUUUFF",
+      "....RRRRLGGGGGUUUHH",
+      "....RRRRLGGGGGUUHH",
+      "....RRRSSSGGGGUHHH",
+      "....MMMMSSGGGGUHHH",
+      ".....MMMSSGGGGUUHH",
+      ".....MMMSSGGGUAAAA",
+      "....MMMMSSGGAAAAAB",
+      "....MMMMSSKKAAAAAAA",
+      "....MMKKKKKKAAAAAAA",
+      "...OMMKKKKKKAAAAAAAA",
+      "...OOOKKKKKKAAAAAAAA",
+      "...OOOPKKKKKAAAAAAA",
+      "...OOOOPPKKKAAAAA",
+      "...OOOPPPPPPAA",
+      "..OOPPPPPPPPA",
+      "..OPPPPPPP.PP",
+      "..PPPPPPPP",
+      "..EEEEEEEE.E",
+      "..EEEEEEEE.E",
+      "..EEEEEEEE",
+      "..EEEEEEEE",
+      "..EEEEEEE",
+      "...EEEEE",
+      "..TTTTT",
+      "..TTTTTT",
+      "..TTTTTTT",
+      "..TTTTTTT",
+      ".TTTTTTT",
+      "TTTTTTT",
+      "TTTTTT",
+      "..TTT",
+      "..TTTT..........WWW",
+      ".....T.........W",
+      "",
+      "......W",
+      "......WW",
+      ".......WWW"
+    ],
+    names: {"A": "Buenos Aires", "B": "CABA", "C": "Catamarca", "D": "Chaco", "E": "Chubut", "F": "Corrientes", "G": "Córdoba", "H": "Entre Ríos", "I": "Formosa", "J": "Jujuy", "K": "La Pampa", "L": "La Rioja", "M": "Mendoza", "N": "Misiones", "O": "Neuquén", "P": "Río Negro", "Q": "Salta", "R": "San Juan", "S": "San Luis", "T": "Santa Cruz", "U": "Santa Fe", "V": "Santiago del Estero", "W": "Tierra del Fuego", "X": "Tucumán"},
+    shade: {"A": 1, "B": 0, "C": 2, "D": 3, "E": 1, "F": 0, "G": 0, "H": 3, "I": 1, "J": 1, "K": 2, "L": 3, "M": 0, "N": 1, "O": 1, "P": 0, "Q": 0, "R": 2, "S": 1, "T": 0, "U": 2, "V": 1, "W": 0, "X": 3}
+  };
+
+  var SHADES = ['#1C3C4D', '#2F6690', '#5A8DB5', '#8FB4D2'];
   var MESO = { 'Misiones': 1, 'Corrientes': 1, 'Entre Ríos': 1 };
   document.querySelectorAll('svg[data-tilemap]').forEach(function (m) {
     var meso = m.getAttribute('data-tilemap') === 'meso';
-    var color = meso ? 'var(--green)' : 'var(--blue)';
-    var S = 18, G = 3, extra = meso ? 78 : 0;
-    m.setAttribute('viewBox', '0 0 ' + (5 * (S + G) + extra) + ' ' + (8 * (S + G)));
-    TILES.forEach(function (t) {
-      var on = !meso || MESO[t[0]];
-      var r = svgEl('rect', { x: t[1] * (S + G), y: t[2] * (S + G), width: S, height: S, rx: 2.5, fill: on ? color : 'var(--rule)' }, m);
-      svgEl('title', {}, r).textContent = t[0];
-      if (meso && on) {
-        svgEl('text', { x: 5 * (S + G) + 5, y: t[2] * (S + G) + S / 2 + 4 }, m).textContent = t[0];
+    var C = 5, G = 1, U = C + G, W = AR.cols * U, H = AR.rows.length * U, LAB = meso ? 118 : 0;
+    m.setAttribute('viewBox', '0 0 ' + (W + LAB) + ' ' + H);
+    var groups = {}, cells = {};
+    AR.rows.forEach(function (row, r) {
+      for (var c = 0; c < row.length; c++) {
+        var k = row.charAt(c);
+        if (k === '.') { continue; }
+        if (!groups[k]) {
+          var name = AR.names[k];
+          var fill = meso ? (MESO[name] ? 'var(--green)' : 'var(--rule)') : SHADES[AR.shade[k]];
+          groups[k] = svgEl('g', { fill: fill }, m);
+          svgEl('title', {}, groups[k]).textContent = name;
+          cells[k] = [];
+        }
+        svgEl('rect', { x: c * U, y: r * U, width: C, height: C }, groups[k]);
+        cells[k].push([r, c]);
       }
     });
+    if (meso) {
+      // Labels to the right, with a leader line from each province's centre
+      var y0 = -Infinity;
+      ['Misiones', 'Corrientes', 'Entre Ríos'].forEach(function (name) {
+        var k = Object.keys(AR.names).filter(function (x) { return AR.names[x] === name; })[0];
+        var pts = cells[k], cr = 0, cc = 0;
+        pts.forEach(function (p) { cr += p[0] / pts.length; cc += p[1] / pts.length; });
+        var cx = (cc + .5) * U, cy = (cr + .5) * U, ly = Math.max(cy, y0 + 22);
+        y0 = ly;
+        svgEl('line', { x1: cx, y1: cy, x2: W + 8, y2: ly }, m);
+        svgEl('text', { x: W + 12, y: ly + 6 }, m).textContent = name;
+      });
+    }
   });
 
   // ---- Figura 1: career timeline built from the CV ----
