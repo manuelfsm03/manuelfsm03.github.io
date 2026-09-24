@@ -391,7 +391,7 @@ figure.fig {
   .tl { --label-w: 0px; --gap: 0px; }
   .tl-row, .tl-axis { grid-template-columns: 1fr; }
   .tl-row { padding: 4px 0 6px; }
-  .tl-label { margin-bottom: 4px; font-size: .84rem; }
+  .tl-label { position: relative; background: var(--paper); padding-bottom: 4px; margin-bottom: 0; font-size: .84rem; }
   .tl-axis > span:first-child { display: none; }
 }
 
