@@ -43,7 +43,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=9">
+<link rel="stylesheet" href="style.css?v=10">
 </head>
 <body data-lang="es" data-title-es="Manuel Fernández San Martín" data-title-en="Manuel Fernández San Martín">
 
@@ -65,23 +65,8 @@
   <div class="ticker-track" id="tickerTrack"></div>
 </div>
 
-<main class="wrap">
-
-  <nav class="side-toc" aria-label="Índice">
-    <a href="#trabajo"><span data-lang="es">Trabajo destacado</span><span data-lang="en">Selected work</span></a>
-    <a href="#ahora"><span data-lang="es">Ahora mismo</span><span data-lang="en">Right now</span></a>
-    <a href="#fuera"><span data-lang="es">Fuera de lo profesional</span><span data-lang="en">Beyond work</span></a>
-    <a href="#hablemos"><span data-lang="es">Hablemos</span><span data-lang="en">Let's talk!</span></a>
-  </nav>
-
-  <section class="hero">
-    <div class="hero-curve" aria-hidden="true">
-      <svg viewBox="0 0 780 260" preserveAspectRatio="none">
-        <path d="M0 210 C80 198 140 178 220 184 C300 190 360 148 440 154 C520 160 580 112 660 104 L780 96" fill="none" stroke="#2E5A6E" stroke-opacity=".28" stroke-width="2"/>
-        <path d="M0 170 C90 182 160 204 240 196 C320 188 380 226 460 214 C540 202 600 172 680 166 L780 162" fill="none" stroke="#A9832B" stroke-opacity=".3" stroke-width="2"/>
-        <path d="M0 236 C100 230 180 240 260 232 C360 222 420 244 520 238 C600 232 660 218 780 212" fill="none" stroke="#4a7a6a" stroke-opacity=".16" stroke-width="2"/>
-      </svg>
-    </div>
+<section class="hero-band">
+  <div class="hero-inner">
     <div class="hero-text">
       <div class="kicker" data-lang="es">Economista (UBA) · economía aplicada &amp; datos</div>
       <div class="kicker" data-lang="en">Economist (UBA) · applied economics &amp; data</div>
@@ -107,14 +92,48 @@
         <a href="https://github.com/manuelfsm03" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
-    <div class="hero-photo-wrap">
-      <div class="hero-photo-plate" aria-hidden="true"></div>
-      <img class="hero-photo" src="assets/perfil.jpg" alt="Foto de Manuel Fernández San Martín">
-      <div class="hero-tag mono">BUENOS AIRES, AR</div>
-    </div>
-  </section>
 
-  <div class="ledger"></div>
+    <figure class="anscombe" id="anscombe">
+      <div class="frame">
+        <div class="ans-top">
+          <span><span data-lang="es">Conjunto de datos</span><span data-lang="en">Dataset</span></span>
+          <span class="seg" id="ans-sets" role="group" aria-label="Anscombe">
+            <button type="button" data-set="0" aria-pressed="true">I</button>
+            <button type="button" data-set="1" aria-pressed="false">II</button>
+            <button type="button" data-set="2" aria-pressed="false">III</button>
+            <button type="button" data-set="3" aria-pressed="false">IV</button>
+            <button type="button" class="ans-reset" id="ans-reset" hidden><span data-lang="es">Reiniciar</span><span data-lang="en">Reset</span></button>
+          </span>
+        </div>
+        <svg id="ans-plot" viewBox="0 0 440 326" role="img" aria-label="Gráfico de dispersión del cuarteto de Anscombe con su recta de regresión"></svg>
+      </div>
+      <div class="fig-bottom">
+        <div class="photo-wrap">
+          <img class="cover-photo" src="assets/perfil.jpg" alt="Foto de Manuel Fernández San Martín" width="164" height="205">
+          <div class="hero-tag">BUENOS AIRES, AR</div>
+        </div>
+        <div class="console">
+          <div class="console-bar" aria-hidden="true"><i></i><i></i><i></i><span>R</span></div>
+          <pre id="ans-console" aria-label="Salida de R"></pre>
+        </div>
+      </div>
+      <figcaption>
+        <span data-lang="es"><i>El cuarteto de Anscombe (1973):</i> cuatro conjuntos de datos con la misma media, varianza, correlación y recta de regresión. Por eso siempre hay que graficar. <span class="hint">Arrastrá un punto y mirá la consola.</span></span>
+        <span data-lang="en"><i>Anscombe's quartet (1973):</i> four datasets with the same mean, variance, correlation, and regression line. That's why you always plot your data. <span class="hint">Drag a point and watch the console.</span></span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<main class="wrap">
+
+  <nav class="side-toc" aria-label="Índice">
+    <a href="#trabajo"><span data-lang="es">Trabajo destacado</span><span data-lang="en">Selected work</span></a>
+    <a href="#ahora"><span data-lang="es">Ahora mismo</span><span data-lang="en">Right now</span></a>
+    <a href="#fuera"><span data-lang="es">Fuera de lo profesional</span><span data-lang="en">Beyond work</span></a>
+    <a href="#hablemos"><span data-lang="es">Hablemos</span><span data-lang="en">Let's talk!</span></a>
+  </nav>
+
 
   <span id="trabajo" class="anchor"></span>
   <div data-lang="es"><h2>Algunos trabajos!</h2></div>
@@ -123,13 +142,8 @@
   <div class="work-grid">
 
     <a class="work-card" href="publications.html">
-      <div class="work-visual" aria-hidden="true">
-        <svg viewBox="0 0 220 110" preserveAspectRatio="none">
-          <line x1="24" y1="88" x2="196" y2="88" stroke="#DAD5C7" stroke-width="1"/>
-          <rect x="44" y="34" width="30" height="54" fill="#2F6B52" opacity=".85"/>
-          <rect x="96" y="50" width="30" height="38" fill="#A9832B" opacity=".9"/>
-          <rect x="148" y="60" width="30" height="28" fill="#2E5A6E" opacity=".85"/>
-        </svg>
+      <div class="work-visual panel green" aria-hidden="true">
+        <svg class="tilemap" data-tilemap="meso"></svg>
       </div>
       <div class="work-body">
         <span class="work-title" data-lang="es">Biomasa en la Mesopotamia argentina</span>
@@ -142,42 +156,54 @@
     </a>
 
     <a class="work-card" href="publications.html">
-      <div class="work-visual" aria-hidden="true">
-        <svg viewBox="0 0 220 110" preserveAspectRatio="none">
-          <line x1="24" y1="92" x2="196" y2="92" stroke="#DAD5C7" stroke-width="1"/>
-          <g fill="#2E5A6E" opacity=".8">
-            <rect x="26" y="30" width="4" height="62"/><rect x="33" y="44" width="4" height="48"/><rect x="40" y="52" width="4" height="40"/><rect x="47" y="38" width="4" height="54"/><rect x="54" y="60" width="4" height="32"/><rect x="61" y="47" width="4" height="45"/><rect x="68" y="66" width="4" height="26"/><rect x="75" y="55" width="4" height="37"/><rect x="82" y="42" width="4" height="50"/><rect x="89" y="70" width="4" height="22"/><rect x="96" y="58" width="4" height="34"/><rect x="103" y="36" width="4" height="56"/>
-          </g>
-          <g fill="#A9832B" opacity=".85">
-            <rect x="110" y="63" width="4" height="29"/><rect x="117" y="49" width="4" height="43"/><rect x="124" y="72" width="4" height="20"/><rect x="131" y="57" width="4" height="35"/><rect x="138" y="45" width="4" height="47"/><rect x="145" y="67" width="4" height="25"/><rect x="152" y="53" width="4" height="39"/><rect x="159" y="75" width="4" height="17"/><rect x="166" y="61" width="4" height="31"/><rect x="173" y="40" width="4" height="52"/><rect x="180" y="69" width="4" height="23"/><rect x="187" y="56" width="4" height="36"/>
-          </g>
-        </svg>
+      <div class="work-visual panel blue" aria-hidden="true">
+        <svg class="tilemap" data-tilemap="all"></svg>
+        <div class="big-n">24<small><span data-lang="es">jurisdicciones, cada una con su vector de empleo</span><span data-lang="en">jurisdictions, each with its employment vector</span></small></div>
       </div>
       <div class="work-body">
         <span class="work-title" data-lang="es">Vectores de empleo provincial</span>
         <span class="work-title" data-lang="en">Provincial employment vectors</span>
         <span class="work-desc" data-lang="es">Nota Técnica MESi N.°8 (Ojeda, Loza y Fernández San Martín): estimación de empleo para las 24 jurisdicciones. Colaboré en investigación y redacción.</span>
-        <span class="work-desc" data-lang="en">MESi Technical Note No. 8 (Ojeda, Loza & Fernández San Martín): employment estimation for all 24 jurisdictions. I contributed research and drafting.</span>
+        <span class="work-desc" data-lang="en">MESi Technical Note No. 8 (Ojeda, Loza &amp; Fernández San Martín): employment estimation for all 24 jurisdictions. I contributed research and drafting.</span>
         <span class="work-link" data-lang="es">Ver más →</span>
         <span class="work-link" data-lang="en">Read more →</span>
       </div>
     </a>
 
     <a class="work-card" href="https://github.com/manuelfsm03/EconData_argy" target="_blank" rel="noopener">
-      <div class="work-visual" aria-hidden="true">
-        <svg viewBox="0 0 220 110" preserveAspectRatio="none">
-          <line x1="24" y1="90" x2="196" y2="90" stroke="#DAD5C7" stroke-width="1"/>
-          <polyline points="24,72 46,66 68,74 90,58 112,63 134,44 156,50 178,32 196,36" fill="none" stroke="#A9832B" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
-          <polyline points="24,80 46,78 68,82 90,73 112,76 134,64 156,68 178,55 196,58" fill="none" stroke="#2E5A6E" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" opacity=".7"/>
-          <circle cx="196" cy="36" r="3" fill="#2F6B52"/>
-        </svg>
+      <div class="work-visual panel term" aria-hidden="true">
+        <div class="term-ui">
+          <div class="term-bar"><span>LA PIZARRA</span><span>● live</span></div>
+          <div class="term-tabs"><span class="on">MACRO</span><span>DÓLAR</span><span>BONOS</span><span>DEUDA</span><span>AGRO</span><span>NOTICIAS</span></div>
+          <div class="term-line">&gt; lapizarra.ar<span class="caret"></span></div>
+        </div>
       </div>
       <div class="work-body">
-        <span class="work-title">EconData_argy</span>
-        <span class="work-desc" data-lang="es">Dashboard abierto de datos macro y micro de Argentina, construido en Python. Código en GitHub.</span>
-        <span class="work-desc" data-lang="en">Open dashboard of Argentine macro and micro data, built in Python. Code on GitHub.</span>
+        <span class="work-title">La Pizarra (EconData_argy)</span>
+        <span class="work-desc" data-lang="es">Tablero abierto de la economía argentina en lapizarra.ar: actividad, precios, fiscal, dólar, bonos y agro, con datos oficiales. Proyecto colectivo; el repo vive en mi GitHub.</span>
+        <span class="work-desc" data-lang="en">Open dashboard of the Argentine economy at lapizarra.ar: activity, prices, fiscal accounts, FX, bonds, and agriculture from official data. A group project; the repo lives on my GitHub.</span>
         <span class="work-link" data-lang="es">Ver el repo →</span>
         <span class="work-link" data-lang="en">See the repo →</span>
+      </div>
+    </a>
+
+    <a class="work-card" href="cv.html#proyectos">
+      <div class="work-visual panel gold" aria-hidden="true">
+        <div class="flow">
+          <div class="flow-col"><span class="node">SIO</span><span class="node">MAGyP</span><span class="node"><span data-lang="es">Balances O/D</span><span data-lang="en">S&amp;D balances</span></span></div>
+          <span class="arrow">→</span>
+          <span class="node mid"><span data-lang="es">Modelo<br>por cohortes</span><span data-lang="en">Cohort<br>model</span></span>
+          <span class="arrow">→</span>
+          <span class="node out"><span data-lang="es">Tablero</span><span data-lang="en">Dashboard</span></span>
+        </div>
+      </div>
+      <div class="work-body">
+        <span class="work-title" data-lang="es">Monitor de venta de productores</span>
+        <span class="work-title" data-lang="en">Farmer-selling monitor</span>
+        <span class="work-desc" data-lang="es">Herramienta interna para Bunge (Python y Streamlit): junta datos oficiales de comercialización con balances de oferta y demanda para seguir cuánto grano vendieron ya los productores.</span>
+        <span class="work-desc" data-lang="en">Internal tool for Bunge (Python and Streamlit): combines official grain-trade data with supply-and-demand balances to track how much grain farmers have already sold.</span>
+        <span class="work-link" data-lang="es">Ver en el CV →</span>
+        <span class="work-link" data-lang="en">See in the CV →</span>
       </div>
     </a>
 
@@ -305,6 +331,6 @@
 
 <footer><div class="wrap">© 2026 Manuel Fernández San Martín · <a href="mailto:manuelfsm03@gmail.com">manuelfsm03@gmail.com</a> · <a href="https://github.com/manuelfsm03" target="_blank" rel="noopener">GitHub</a></div></footer>
 
-<script src="script.js?v=9"></script>
+<script src="script.js?v=10"></script>
 </body>
 </html>
