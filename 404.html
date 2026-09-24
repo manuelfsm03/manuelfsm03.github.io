@@ -8,15 +8,15 @@
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/style.css?v=9">
+<link href="https://fonts.googleapis.com/css2?family=Piazzolla:ital,opsz,wght@0,8..30,300..900;1,8..30,300..900&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Alegreya+Sans+SC:wght@500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css?v=10">
 </head>
 <body data-lang="es" data-title-es="404 | Manuel Fernández San Martín" data-title-en="404 | Manuel Fernández San Martín">
 
-<header class="runhead">
-  <div class="wrap">
-    <a class="rh-name" href="/index.html">Manuel Fernández San Martín</a>
-    <nav class="rh-links" aria-label="Principal">
+<header class="cover">
+  <div class="inner masthead">
+    <a class="series" href="/index.html"><span class="sc"><span data-lang="es">Documentos de trabajo</span><span data-lang="en">Working papers</span></span> · <b>N.º 1</b></a>
+    <nav aria-label="Principal">
       <a href="/index.html"><span data-lang="es">inicio</span><span data-lang="en">home</span></a>
       <a href="/cv.html">cv</a>
       <a href="/publications.html"><span data-lang="es">trabajos</span><span data-lang="en">work</span></a>
@@ -24,21 +24,44 @@
       <button class="lang-toggle" type="button" aria-label="Switch to English">EN</button>
     </nav>
   </div>
+  <div class="inner cover-page">
+    <p class="issue sc"><span data-lang="es">Fe de erratas</span><span data-lang="en">Errata</span></p>
+    <h1 class="page-title">404</h1>
+    <p class="dek"><span data-lang="es">Observación fuera de la muestra.</span><span data-lang="en">Out-of-sample observation.</span></p>
+  </div>
 </header>
 
-<main class="wrap">
+<main class="desk">
+  <article class="sheet">
+    <div class="runhead"><span>Fernández San Martín</span><span><span data-lang="es">Fe de erratas</span><span data-lang="en">Errata</span></span></div>
 
-  <h1 class="err-code">404</h1>
-  <p class="err-sub" data-lang="es">Observación fuera de la muestra.</p>
-  <p class="err-sub" data-lang="en">Out-of-sample observation.</p>
+    <figure class="fig" style="margin-top:0">
+      <p class="fig-title" style="margin-bottom:10px"><b data-lang="es">Figura E1.</b><b data-lang="en">Figure E1.</b> <span data-lang="es">Dónde estás, respecto del resto del sitio</span><span data-lang="en">Where you are, relative to the rest of the site</span></p>
+      <svg class="outlier" viewBox="0 0 480 220" role="img" aria-label="Gráfico: las páginas del sitio agrupadas a la izquierda y esta página, en rojo, lejos a la derecha">
+        <line x1="30" y1="190" x2="460" y2="190"/>
+        <line x1="30" y1="20" x2="30" y2="190"/>
+        <circle class="pt" cx="92" cy="128" r="7"/><text x="104" y="132"><tspan data-lang="es">inicio</tspan><tspan data-lang="en">home</tspan></text>
+        <circle class="pt" cx="70" cy="150" r="7"/><text x="54" y="172">cv</text>
+        <circle class="pt" cx="118" cy="158" r="7"/><text x="130" y="162"><tspan data-lang="es">trabajos</tspan><tspan data-lang="en">work</tspan></text>
+        <circle class="pt" cx="104" cy="104" r="7"/><text x="116" y="100"><tspan data-lang="es">contacto</tspan><tspan data-lang="en">contact</tspan></text>
+        <circle class="me" cx="420" cy="42" r="9"/><text class="me-lab" x="406" y="46" text-anchor="end"><tspan data-lang="es">vos, acá</tspan><tspan data-lang="en">you, here</tspan></text>
+      </svg>
+      <figcaption class="fig-note"><span data-lang="es"><i>Fuente:</i> elaboración propia, con n = 5.</span><span data-lang="en"><i>Source:</i> author's own elaboration, n = 5.</span></figcaption>
+    </figure>
 
-  <p data-lang="es">Esta página no existe: puede que el link esté mal escrito o que la página se haya mudado. Probá desde el <a href="/index.html">inicio</a> o el <a href="/cv.html">CV</a>.</p>
-  <p data-lang="en">This page doesn't exist: the link may be mistyped, or the page may have moved. Try the <a href="/index.html">home page</a> or the <a href="/cv.html">CV</a>.</p>
-
+    <div class="prose" style="margin-top:28px">
+      <p data-lang="es">Esta página no existe: puede que el link esté mal escrito o que la página se haya mudado. Volvé al <a href="/index.html">inicio</a> o mirá el <a href="/cv.html">CV</a>.</p>
+      <p data-lang="en">This page doesn't exist: the link may be mistyped, or the page may have moved. Go back <a href="/index.html">home</a> or see the <a href="/cv.html">CV</a>.</p>
+    </div>
+  </article>
 </main>
 
-<footer><div class="wrap">Manuel Fernández San Martín · Buenos Aires · <a href="mailto:manuelfsm03@gmail.com">manuelfsm03@gmail.com</a> · <a href="https://www.linkedin.com/in/manuel-fernandez-san-martin" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/manuelfsm03" target="_blank" rel="noopener">GitHub</a></div></footer>
+<footer>
+  <div class="inner">
+    <p class="errata"><span data-lang="es">Los errores que persistan son de mi exclusiva responsabilidad. Este, en particular.</span><span data-lang="en">All remaining errors are my own. This one especially.</span></p>
+  </div>
+</footer>
 
-<script src="/script.js?v=9"></script>
+<script src="/script.js?v=10"></script>
 </body>
 </html>
