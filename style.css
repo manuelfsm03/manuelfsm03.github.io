@@ -786,3 +786,150 @@ body[data-lang="es"] .work-link[data-lang="es"],
 body[data-lang="en"] .work-link[data-lang="en"],
 body[data-lang="es"] .contact-arrow[data-lang="es"],
 body[data-lang="en"] .contact-arrow[data-lang="en"] { display: inline-block; }
+
+/* ---------- Figura 1 (home): trayectoria armada con las fechas del CV ----------
+   Posiciones en meses desde enero 2022: --s inicio, --e fin, --span largo del eje, --t hoy.
+   script.js mueve "hoy" y las barras en curso a la fecha real. */
+figure.fig { margin: 1.8em 0 0; }
+.fig-title {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 1rem;
+  margin: 0 0 .4rem;
+}
+.fig-title b { font-weight: 600; }
+.fig-note {
+  margin: .9rem 0 0;
+  font-size: .8rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.fig-note i { color: var(--ink); }
+.fig-note .swatch {
+  display: inline-block;
+  width: .9em;
+  height: .5em;
+  border-radius: 1px;
+  margin: 0 .25em 0 .1em;
+  vertical-align: .05em;
+}
+.fig-note .swatch.dashed { background: transparent; border: 1px dashed #8C9096; }
+
+.tl {
+  --label-w: 15rem;
+  --gap: 14px;
+  --span: 72;
+  position: relative;
+  padding-top: 1.4rem;
+  font-size: .84rem;
+  line-height: 1.3;
+}
+.tl-row, .tl-axis {
+  display: grid;
+  grid-template-columns: var(--label-w) 1fr;
+  column-gap: var(--gap);
+  align-items: center;
+}
+.tl-row { padding: 5px 0; }
+.tl-label .org { color: var(--muted); }
+.tl-track {
+  position: relative;
+  height: 12px;
+  background: linear-gradient(var(--rule), var(--rule)) 0 50% / 100% 1px no-repeat;
+}
+.tl-grid {
+  position: absolute;
+  top: 1.4rem;
+  bottom: 1.9rem;
+  left: calc(var(--label-w) + var(--gap));
+  right: 0;
+  background: linear-gradient(to right, rgba(218, 213, 199, .75) 1px, transparent 1px) 0 0 / calc(100% * 12 / var(--span)) 100% repeat-x;
+  pointer-events: none;
+}
+.tl-bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--s) / var(--span) * 100%);
+  width: calc((var(--e) - var(--s)) / var(--span) * 100%);
+  border-radius: 1px;
+}
+.tl-bar.work { background: var(--accent); color: var(--accent); }
+.tl-bar.research { background: var(--accent2); color: var(--accent2); }
+.tl-bar.teach { background: var(--green); color: var(--green); }
+.tl-bar.edu { background: #8C9096; color: #8C9096; }
+.tl-bar.projection {
+  background: repeating-linear-gradient(135deg, rgba(140, 144, 150, .35) 0 3px, transparent 3px 6px);
+  border: 1px dashed #8C9096;
+}
+.tl-bar.ongoing::after {
+  content: "";
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-left: 6px solid currentColor;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+.tl-axis {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--ink);
+  color: var(--muted);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .7rem;
+}
+.tl-years { position: relative; height: 1.3em; }
+.tl-years span {
+  position: absolute;
+  left: calc(var(--y) / var(--span) * 100%);
+  padding-left: 3px;
+  border-left: 1px solid var(--rule);
+}
+.tl-today {
+  position: absolute;
+  top: 0;
+  bottom: 1.9rem;
+  left: calc(var(--label-w) + var(--gap) + (100% - var(--label-w) - var(--gap)) * var(--t) / var(--span));
+  border-left: 1px dashed var(--ink);
+  pointer-events: none;
+}
+.tl-today span {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: .78rem;
+  font-style: italic;
+  line-height: 1;
+}
+@media (max-width: 640px) {
+  .tl { --label-w: 0px; --gap: 0px; }
+  .tl-row, .tl-axis { grid-template-columns: 1fr; }
+  .tl-row { padding: 4px 0 6px; }
+  .tl-label { position: relative; background: var(--bg); padding-bottom: 4px; margin-bottom: 0; }
+  .tl-axis > span:first-child { display: none; }
+}
+
+/* ---------- Footnotes (home) ---------- */
+sup.fn { line-height: 0; font-size: .72em; }
+main p sup.fn a { background: none; color: var(--link); padding: 0 1px; }
+.footnotes {
+  position: relative;
+  margin-top: 3em;
+  padding-top: .9em;
+  font-size: .82rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.footnotes::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 7rem;
+  border-top: 1px solid var(--ink);
+}
+.footnotes ol { margin: 0; padding-left: 1.2em; }
+.footnotes li:target { background: rgba(169, 131, 43, .14); }
+.fn-back { margin-left: .2em; }

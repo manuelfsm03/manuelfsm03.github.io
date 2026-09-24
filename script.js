@@ -110,4 +110,34 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', updateToc, { passive: true });
     updateToc();
   }
+
+  // ---- Figura 1: move "today" and the ongoing bars to the actual date ----
+  // Positions are months since January 2022; the static HTML is correct as of September 2026.
+  var tl = document.querySelector('.tl');
+  if (tl) {
+    var BASE = 2022;
+    var now = new Date();
+    var t = (now.getFullYear() - BASE) * 12 + now.getMonth() + (now.getDate() - 1) / 31;
+    var span = parseFloat(tl.style.getPropertyValue('--span')) || 72;
+    var needed = (now.getFullYear() - BASE + 1) * 12;
+    if (needed > span) {
+      span = needed;
+      tl.style.setProperty('--span', span);
+      var years = tl.querySelector('.tl-years');
+      if (years) {
+        var html = '';
+        for (var yr = BASE; yr < BASE + span / 12; yr++) {
+          html += '<span style="--y:' + (yr - BASE) * 12 + '">' + yr + '</span>';
+        }
+        years.innerHTML = html;
+      }
+      document.querySelectorAll('.js-tl-end').forEach(function (el) { el.textContent = BASE + span / 12 - 1; });
+    }
+    tl.querySelectorAll('.tl-bar.ongoing').forEach(function (bar) {
+      var s = parseFloat(bar.style.getPropertyValue('--s')) || 0;
+      bar.style.setProperty('--e', Math.max(t, s + 0.5).toFixed(2));
+    });
+    var today = tl.querySelector('.tl-today');
+    if (today) { today.style.setProperty('--t', t.toFixed(2)); }
+  }
 });
