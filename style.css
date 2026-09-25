@@ -1045,3 +1045,107 @@ main p sup.fn a { background: none; color: var(--link); padding: 0 1px; }
 .code-card { font: .74rem/1.6 'IBM Plex Mono', monospace; background: var(--card); border: 1px solid var(--rule); border-radius: 4px; padding: 10px 14px; color: var(--ink); white-space: pre; }
 .code-card .k { color: var(--accent2); }
 .code-card .o { color: var(--link); font-weight: 500; }
+
+/* =========================================================
+   Home layout (reviewed on the Claude Design canvas):
+   one 1120px grid for nav, hero and body; each section is a
+   rail (title) + content; photo next to the name; R console
+   overlapping the chart's lower-right corner.
+   ========================================================= */
+.home .nav-inner,
+.home main.wrap,
+.home footer .wrap { max-width: 1120px; }
+
+/* Hero: photo above the name on desktop, beside it on phones */
+.hero-id .photo-wrap { width: max-content; margin: 0 0 30px 6px; }
+.hero-id .cover-photo { width: 124px; }
+
+/* Anscombe: the console sits in the chart frame's empty bottom strip and pokes out on the right */
+.ans-stage { display: flex; flex-direction: column; }
+.ans-stage .frame { width: calc(100% - 20px); }
+.ans-stage .console { position: relative; z-index: 2; width: min(296px, 74%); margin: -44px 0 0 auto; }
+.console > summary {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, .05);
+  font: 500 .72rem 'IBM Plex Mono', monospace;
+  color: #9AA79C;
+  cursor: pointer;
+  list-style: none;
+}
+.console > summary::-webkit-details-marker { display: none; }
+.console > summary i { width: 8px; height: 8px; border-radius: 50%; background: #3B5147; }
+.console .c-title { margin-left: 6px; }
+.console .c-caret::before { content: "▾"; color: var(--gold-light); margin-right: 2px; }
+.console .c-hint { display: none; }
+.console:not([open]) > summary { min-height: 44px; font-size: .78rem; color: var(--band-text); }
+.console:not([open]) .c-caret::before { content: "▸"; }
+.console:not([open]) > summary i,
+.console:not([open]) .c-title { display: none; }
+.console:not([open]) .c-hint { display: inline; }
+
+/* Sections: title rail + content, aligned with the hero */
+.rail-sec {
+  display: grid;
+  grid-template-columns: 240px minmax(0, 1fr);
+  column-gap: 48px;
+  padding: 64px 0;
+  scroll-margin-top: 70px;
+}
+.home .rail-h {
+  margin: 0;
+  align-self: start;
+  position: sticky;
+  top: 88px;
+}
+.rail-body { min-width: 0; }
+.rail-body.prose { max-width: 620px; }
+.rail-body.prose p:first-child { margin-top: 0; }
+.home .work-grid { margin-top: 0; }
+.home .work-visual.panel { height: 204px; }
+.home .work-title { font-size: 1.12rem; }
+.home .work-desc { font-size: .92rem; line-height: 1.55; }
+.home figure.fig { margin-top: 0; }
+.now-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 32px;
+  margin: 24px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: .92rem;
+  line-height: 1.5;
+}
+.now-grid li { padding-top: 10px; border-top: 1px solid var(--rule); }
+.home .cta-final { margin-top: 0; }
+.home .cta-final p { margin-top: 0; }
+.home .footnotes { margin-top: 2.4em; }
+
+/* One hairline per section, keeping the tricolor tick */
+.home .ledger { height: 1px; margin: 0; background: var(--rule); }
+
+@media (max-width: 900px) {
+  .rail-sec { grid-template-columns: 1fr; padding: 44px 0; }
+  .home .rail-h { position: static; margin-bottom: 20px; }
+  .home #hablemos .rail-h { display: none; }
+  .now-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .hero-id {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "kick kick" "name photo";
+    column-gap: 16px;
+    align-items: start;
+  }
+  .hero-id .kicker { grid-area: kick; }
+  .hero-id h1 { grid-area: name; }
+  .hero-id .photo-wrap { grid-area: photo; margin: 4px 0 0; }
+  .hero-id .cover-photo { width: 88px; border-width: 4px; }
+  .hero-id .hero-tag { display: none; }
+  .ans-stage .frame { width: 100%; }
+  .ans-stage .console { width: auto; margin: -30px 10px 0; }
+  .home .work-visual.panel { height: 190px; }
+}

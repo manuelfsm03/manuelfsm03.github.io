@@ -412,6 +412,12 @@ document.addEventListener('DOMContentLoaded', function () {
     render();
   }
 
+  // ---- R console: open next to the chart on wide screens, folded into one line on phones ----
+  var consoleBox = document.getElementById('ans-console-box');
+  if (consoleBox && window.matchMedia && window.matchMedia('(max-width: 700px)').matches) {
+    consoleBox.open = false;
+  }
+
   // ---- Side index: hidden while the hero band is on screen (it would sit on the navy grid) ----
   var sideToc = document.querySelector('.side-toc');
   var heroBand = document.querySelector('.hero-band');
