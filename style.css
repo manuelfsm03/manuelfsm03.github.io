@@ -1058,7 +1058,7 @@ main p sup.fn a { background: none; color: var(--link); padding: 0 1px; }
 
 /* Hero: photo above the name on desktop, beside it on phones */
 .hero-id .photo-wrap { width: max-content; margin: 0 0 30px 6px; }
-.hero-id .cover-photo { width: 124px; }
+.hero-id .cover-photo { width: 144px; }
 
 /* Anscombe: the console sits in the chart frame's empty bottom strip and pokes out on the right */
 .ans-stage { display: flex; flex-direction: column; }
@@ -1143,7 +1143,7 @@ main p sup.fn a { background: none; color: var(--link); padding: 0 1px; }
   .hero-id .kicker { grid-area: kick; }
   .hero-id h1 { grid-area: name; }
   .hero-id .photo-wrap { grid-area: photo; margin: 4px 0 0; }
-  .hero-id .cover-photo { width: 88px; border-width: 4px; }
+  .hero-id .cover-photo { width: 100px; border-width: 4px; }
   .hero-id .hero-tag { display: none; }
   .ans-stage .frame { width: 100%; }
   .ans-stage .console { width: auto; margin: -30px 10px 0; }
